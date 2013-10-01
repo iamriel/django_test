@@ -1,0 +1,17 @@
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<a href="{% url 'log-list' %}">Log List</a>
+
+<script type="text/javascript">
+   $(document).ready(function() {
+	   $.ajax({
+	   		csrfmiddlewaretoken: "{{csrf_token}}", 
+	   		data: {
+	   			"Initial Post Key": "Initial Post Value through AJAX",
+	   			"csrfmiddlewaretoken": "{{ csrf_token }}",
+	   		},
+	        type: "POST",
+	        url: "/"
+	    });
+   		return false;
+    });
+</script>

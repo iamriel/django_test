@@ -1,0 +1,38 @@
+{% if log_list %}
+    <table id="logs">
+        <thead>
+            <th>Type</th>
+            <th>Key</th>
+            <th>Value</th>
+            <th></th>
+        <thead>
+        <tbody>
+        {% for log in log_list %}
+            <tr>
+                <td>{{ log.request_type }}</td>
+                <td>{{ log.key }}</td>
+                <td>{{ log.value }}</td>
+                <td><a href="{% url 'log-delete' pk=log.pk %}">Delete</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if is_paginated %}
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="/logs?page={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
+                <span class="page-current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="/logs?page={{ page_obj.next_page_number }}">next</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+{% else %}
+    <h3>Logs</h3>
+    <p>No Log found</p>
+{% endif %}
